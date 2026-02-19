@@ -1,12 +1,12 @@
 :root {
-    --primary-color: #0A2342;
+    --primary-color: #051221;
     --accent-color: #D4AF37;
-    --text-main: #1a1a1a;
-    --text-sub: #555555;
-    --bg-light: #ffffff;
-    --bg-soft: #f9f9f9;
+    --text-main: #f0f0f0;
+    --text-sub: #b0b0b0;
+    --bg-light: #121212;
+    --bg-soft: #1a1a1a;
     --white: #ffffff;
-    --card-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    --card-shadow: 0 20px 40px rgba(0,0,0,0.3);
     --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -92,7 +92,7 @@ header nav a:hover {
 
 .blog-link {
     background: var(--accent-color);
-    color: var(--primary-color) !important;
+    color: #051221 !important; /* Fixed dark color for readability on gold */
     padding: 8px 22px;
     border-radius: 4px;
     font-weight: 700 !important;
@@ -102,7 +102,7 @@ header nav a:hover {
 /* Hero Section */
 #hero {
     height: 100vh;
-    background: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), 
+    background: linear-gradient(rgba(5, 18, 33, 0.8), rgba(5, 18, 33, 0.8)), 
                 url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop') center/cover;
     display: flex;
     align-items: center;
@@ -143,7 +143,7 @@ header nav a:hover {
 .cta-button {
     display: inline-block;
     background: var(--accent-color);
-    color: var(--primary-color);
+    color: #051221;
     padding: 18px 40px;
     text-decoration: none;
     border-radius: 4px;
@@ -153,7 +153,7 @@ header nav a:hover {
 
 .cta-button:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 }
 
 .cta-button.secondary {
@@ -164,7 +164,7 @@ header nav a:hover {
 
 .cta-button.secondary:hover {
     background: var(--white);
-    color: var(--primary-color);
+    color: #051221;
 }
 
 /* About Section */
@@ -232,7 +232,7 @@ header nav a:hover {
 }
 
 .card {
-    background: var(--bg-light);
+    background: #252525; /* Slightly lighter than bg for depth */
     border-radius: 8px;
     overflow: hidden;
     box-shadow: var(--card-shadow);
@@ -247,6 +247,7 @@ header nav a:hover {
     width: 100%;
     height: 240px;
     object-fit: cover;
+    filter: brightness(0.8); /* Match dark theme */
 }
 
 .card-body {
@@ -279,7 +280,7 @@ header nav a:hover {
 .location-map img {
     width: 100%;
     height: 400px;
-    object-fit: cover; /* Keeps it consistent with other section images */
+    object-fit: cover;
     border-radius: 8px;
     box-shadow: var(--card-shadow);
     display: block;
@@ -329,7 +330,7 @@ header nav a:hover {
 }
 
 #contact form {
-    background: var(--white);
+    background: #252525;
     padding: 50px;
     border-radius: 8px;
     display: flex;
@@ -342,7 +343,7 @@ header nav a:hover {
 
 .form-group label {
     display: block;
-    color: #333;
+    color: #f0f0f0;
     font-weight: 500;
     margin-bottom: 8px;
 }
@@ -350,15 +351,17 @@ header nav a:hover {
 .form-group input, .form-group textarea {
     width: 100%;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #444;
     border-radius: 4px;
     font-family: inherit;
     font-size: 1rem;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
 }
 
 #contact button {
-    background: var(--primary-color);
-    color: var(--white);
+    background: var(--accent-color);
+    color: #051221;
     border: none;
     padding: 18px;
     border-radius: 4px;
@@ -369,15 +372,14 @@ header nav a:hover {
 }
 
 #contact button:hover {
-    background: var(--accent-color);
-    color: var(--primary-color);
+    background: var(--white);
 }
 
 /* Footer */
 footer {
     padding: 80px 0 40px;
-    background-color: var(--bg-soft);
-    border-top: 1px solid #eee;
+    background-color: #051221;
+    border-top: 1px solid #222;
 }
 
 .footer-top {
@@ -402,13 +404,18 @@ footer {
 
 .footer-top nav a {
     text-decoration: none;
-    color: var(--text-main);
+    color: var(--text-sub);
     font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.footer-top nav a:hover {
+    color: var(--accent-color);
 }
 
 .footer-bottom {
     padding-top: 40px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #333;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -421,7 +428,7 @@ footer {
 
 .copyright {
     font-size: 0.85rem;
-    color: #aaa;
+    color: #666;
 }
 
 /* Animations */
