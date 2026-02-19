@@ -3,20 +3,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
 
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
     });
 });
+
+// Fade-in Animation on Scroll
+const observerOptions = {
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // Automatic Theme Switch based on South Korea Time (UTC+9)
 function applyAutomaticTheme() {
     const now = new Date();
-    // Get current time in South Korea (UTC+9)
     const koreaTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Seoul"}));
     const hours = koreaTime.getHours();
 
-    // Set Dark Mode between 18:00 (6 PM) and 06:00 (6 AM)
     if (hours >= 18 || hours < 6) {
         document.body.classList.add('dark-theme');
     } else {
@@ -24,8 +45,5 @@ function applyAutomaticTheme() {
     }
 }
 
-// Apply theme on load
 applyAutomaticTheme();
-
-// Optional: Re-check every minute to handle time transitions while the page is open
 setInterval(applyAutomaticTheme, 60000);
