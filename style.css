@@ -41,23 +41,24 @@ body {
     margin: 0 auto;
 }
 
-/* Typography Refinement */
+/* Typography Refinement - Modern Sans-serif */
 h1, h2, h3 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .section-tag {
     display: block;
     color: var(--accent-color);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin-bottom: 15px;
 }
 
-/* Header Logo */
+/* Header Logo - Responsive */
 .logo-area {
     display: flex;
     align-items: center;
@@ -65,22 +66,26 @@ h1, h2, h3 {
 }
 
 .main-logo {
-    height: 48px; /* Increased height for better visibility */
+    height: 54px; /* Default Desktop size */
     width: auto;
     object-fit: contain;
     display: block;
+    transition: var(--transition);
 }
 
 header h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    font-weight: 800;
     letter-spacing: -1px;
     margin: 0;
+    /* Remove traditional feel */
+    font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
 }
 
 header {
     background: var(--primary-color);
     color: var(--white);
-    padding: 1rem 0; /* Balanced padding */
+    padding: 0.8rem 0;
     position: fixed;
     width: 100%;
     top: 0;
@@ -107,7 +112,7 @@ header nav ul li {
 header nav a {
     color: var(--white);
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 0.95rem;
     transition: var(--transition);
     opacity: 0.8;
@@ -144,13 +149,14 @@ header nav a:hover {
     letter-spacing: 4px;
     margin-bottom: 20px;
     color: var(--accent-color);
+    font-weight: 700;
 }
 
 #hero h2 {
-    font-size: 4rem;
+    font-size: 4.2rem;
     line-height: 1.2;
     margin-bottom: 30px;
-    font-family: 'Playfair Display', serif;
+    font-weight: 800;
 }
 
 #hero p {
@@ -158,6 +164,7 @@ header nav a:hover {
     max-width: 600px;
     margin-bottom: 40px;
     opacity: 0.9;
+    font-weight: 300;
 }
 
 .hero-btns {
@@ -484,6 +491,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .main-logo {
+        height: 40px; /* Smaller logo for mobile */
+    }
+
     header .container {
         flex-direction: column;
     }
