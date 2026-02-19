@@ -9,27 +9,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Theme Toggle
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
+// Automatic Theme Switch based on South Korea Time (UTC+9)
+function applyAutomaticTheme() {
+    const now = new Date();
+    // Get current time in South Korea (UTC+9)
+    const koreaTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Seoul"}));
+    const hours = koreaTime.getHours();
 
-// Check for saved theme preference
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme === 'dark') {
-    body.classList.add('dark-theme');
-    themeToggle.textContent = '라이트 모드';
+    // Set Dark Mode between 18:00 (6 PM) and 06:00 (6 AM)
+    if (hours >= 18 || hours < 6) {
+        document.body.classList.add('dark-theme');
+    } else {
+        document.body.classList.remove('dark-theme');
+    }
 }
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    
-    let theme = 'light';
-    if (body.classList.contains('dark-theme')) {
-        theme = 'dark';
-        themeToggle.textContent = '라이트 모드';
-    } else {
-        themeToggle.textContent = '다크 모드';
-    }
-    
-    localStorage.setItem('theme', theme);
-});
+// Apply theme on load
+applyAutomaticTheme();
+
+// Optional: Re-check every minute to handle time transitions while the page is open
+setInterval(applyAutomaticTheme, 60000);
