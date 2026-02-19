@@ -1,8 +1,36 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --header-bg: #0A2342;
+    --header-text: #ffffff;
+    --card-bg: #f4f4f4;
+    --card-shadow: rgba(0,0,0,0.1);
+    --input-border: #cccccc;
+    --button-bg: #0A2342;
+    --button-text: #ffffff;
+    --cta-bg: #D4AF37;
+    --cta-text: #0A2342;
+}
+
+body.dark-theme {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --header-bg: #1a1a1a;
+    --header-text: #ffffff;
+    --card-bg: #1e1e1e;
+    --card-shadow: rgba(0,0,0,0.5);
+    --input-border: #444444;
+    --button-bg: #333333;
+    --button-text: #ffffff;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     margin: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -12,12 +40,13 @@ body {
 }
 
 header {
-    background: #0A2342;
-    color: #fff;
+    background: var(--header-bg);
+    color: var(--header-text);
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.3s;
 }
 
 header .container {
@@ -35,6 +64,8 @@ header nav ul {
     margin: 0;
     padding: 0;
     list-style: none;
+    display: flex;
+    align-items: center;
 }
 
 header nav ul li {
@@ -43,9 +74,25 @@ header nav ul li {
 }
 
 header nav a {
-    color: #fff;
+    color: var(--header-text);
     text-decoration: none;
     font-size: 1.1rem;
+}
+
+#theme-toggle {
+    background: none;
+    border: 1px solid var(--header-text);
+    color: var(--header-text);
+    padding: 5px 10px;
+    margin-left: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+#theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 #hero {
@@ -63,8 +110,8 @@ header nav a {
 
 .cta-button {
     display: inline-block;
-    background: #D4AF37;
-    color: #0A2342;
+    background: var(--cta-bg);
+    color: var(--cta-text);
     padding: 12px 25px;
     text-decoration: none;
     border-radius: 5px;
@@ -90,11 +137,12 @@ section h2 {
 }
 
 .card {
-    background: #f4f4f4;
+    background: var(--card-bg);
     padding: 30px;
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px var(--card-shadow);
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 #contact form {
@@ -107,26 +155,30 @@ section h2 {
 #contact input, #contact textarea {
     margin-bottom: 20px;
     padding: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border);
     border-radius: 5px;
     font-size: 1rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 #contact button {
-    background: #0A2342;
-    color: #fff;
+    background: var(--button-bg);
+    color: var(--button-text);
     padding: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.1rem;
+    transition: background-color 0.3s;
 }
 
 footer {
-    background: #0A2342;
-    color: #fff;
+    background: var(--header-bg);
+    color: var(--header-text);
     text-align: center;
     padding: 20px 0;
+    transition: background-color 0.3s;
 }
 
 @media (max-width: 768px) {
@@ -138,7 +190,16 @@ footer {
         margin-top: 20px;
     }
 
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
     header nav ul li {
-        margin: 0 10px;
+        margin: 5px 0;
+    }
+
+    #theme-toggle {
+        margin: 10px 0 0 0;
     }
 }
