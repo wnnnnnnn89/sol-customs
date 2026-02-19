@@ -289,9 +289,10 @@ header nav a:hover {
 .location-map img {
     width: 100%;
     height: 400px;
-    object-fit: cover;
+    object-fit: cover; /* Keeps it consistent with other section images */
     border-radius: 8px;
     box-shadow: var(--card-shadow);
+    display: block;
 }
 
 .location-info h2 {
