@@ -496,15 +496,35 @@ footer {
 
 @media (max-width: 768px) {
     .header-flex-end {
-        justify-content: center;
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 5px 0;
+        gap: 20px;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+    }
+
+    .header-flex-end::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Chrome/Safari */
+    }
+
+    .lang-switch {
+        flex-shrink: 0;
     }
 
     header nav {
         margin-top: 0;
+        flex-shrink: 0;
     }
     
+    header nav ul {
+        flex-wrap: nowrap;
+    }
+
     header nav ul li {
         margin: 0 10px;
+        flex-shrink: 0;
     }
     
     #hero {
