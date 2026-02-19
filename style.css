@@ -177,6 +177,20 @@ section h2::after {
     text-align: center;
 }
 
+#location {
+    background-color: var(--card-bg);
+    text-align: center;
+}
+
+#location .address {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.map-btn-wrapper {
+    margin-top: 20px;
+}
+
 .service-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
