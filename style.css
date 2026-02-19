@@ -10,16 +10,6 @@
     --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-body.dark-theme {
-    --primary-color: #051221;
-    --accent-color: #c5a02e;
-    --text-main: #f0f0f0;
-    --text-sub: #b0b0b0;
-    --bg-light: #121212;
-    --bg-soft: #1a1a1a;
-    --card-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
 * {
     box-sizing: border-box;
     margin: 0;

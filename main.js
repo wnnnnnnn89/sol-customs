@@ -31,19 +31,3 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// Automatic Theme Switch based on South Korea Time (UTC+9)
-function applyAutomaticTheme() {
-    const now = new Date();
-    const koreaTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Seoul"}));
-    const hours = koreaTime.getHours();
-
-    if (hours >= 18 || hours < 6) {
-        document.body.classList.add('dark-theme');
-    } else {
-        document.body.classList.remove('dark-theme');
-    }
-}
-
-applyAutomaticTheme();
-setInterval(applyAutomaticTheme, 60000);
