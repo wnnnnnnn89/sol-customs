@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-10YH9K55FS"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-10YH9K55FS');
     </script>
     <meta charset="UTF-8">
@@ -18,7 +16,6 @@
     <meta name="description" content="판교에 위치한 솔 관세사무소는 수출입 통관, 관세 환급, FTA 컨설팅 등 전문적인 관세 서비스를 제공합니다.">
     <meta name="keywords" content="솔 관세사무소, 판교 관세사, 성남 관세사, 분당 관세사, 수출, 수입, 통관, 중고차, 수출입 통관, 관세 환급, FTA 컨설팅, 관세 상담">
     <link rel="stylesheet" href="style.css">
-    <!-- Modern Font Setup: Montserrat for English/Numbers, Noto Sans KR for Korean -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -32,6 +29,7 @@
                 <ul>
                     <li><a href="#about" data-i18n="nav_about">소개</a></li>
                     <li><a href="#services" data-i18n="nav_services">서비스</a></li>
+                    <li><a href="#ai-check" data-i18n="nav_ai">AI 조회</a></li>
                     <li><a href="#location" data-i18n="nav_location">오시는 길</a></li>
                     <li><a href="#contact" data-i18n="nav_contact">문의</a></li>
                     <li><a href="https://blog.naver.com/sol_customs" target="_blank" class="blog-link" data-i18n="nav_blog">블로그</a></li>
@@ -100,13 +98,47 @@
                 </div>
                 <div class="card fade-in">
                     <div class="card-image">
-                        <!-- Reliable High-Quality Asian Business Image -->
                         <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="FTA 컨설팅">
                     </div>
                     <div class="card-body">
                         <h3 data-i18n="service3_title">FTA 컨설팅</h3>
                         <p data-i18n="service3_desc">원산지 증명 및 FTA 협정 활용 전략을 통해 글로벌 경쟁력을 확보해 드립니다.</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ai-check" style="background-color: #f8fafc; padding: 100px 0;">
+        <div class="container">
+            <div class="section-header fade-in" style="text-align: center; margin-bottom: 50px;">
+                <span class="section-tag">AI Smart Solution</span>
+                <h2>AI 실시간 수입 규제 조회</h2>
+                <p style="color: #64748b; margin-top: 15px;">조회할 물품 사진을 업로드하면 Gemini AI가 관세율과 인증 요건을 즉시 분석합니다.</p>
+            </div>
+
+            <div class="contact-wrapper fade-in" style="max-width: 650px; margin: 0 auto; background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                <div id="ai-drop-area" onclick="document.getElementById('ai-fileInput').click()" 
+                     style="border: 2px dashed #e2e8f0; border-radius: 20px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; background: #fcfcfc; position: relative; overflow: hidden;">
+                    <div id="ai-upload-placeholder" style="text-align: center;">
+                        <span style="font-size: 55px;">📸</span>
+                        <p style="margin-top: 20px; color: #94a3b8; font-weight: 500;">사진을 업로드하여 분석 시작</p>
+                    </div>
+                    <img id="ai-preview-img" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                </div>
+                <input type="file" id="ai-fileInput" accept="image/*" style="display:none" onchange="handleAiFile(this)">
+
+                <button class="cta-button" id="ai-analyze-btn" onclick="askGemini()" style="width: 100%; margin-top: 25px; border: none; font-family: inherit; font-size: 1.1rem; cursor: pointer;">AI 분석 실행</button>
+                
+                <div id="ai-loading-status" style="display: none; text-align: center; margin-top: 25px; color: #2563eb; font-weight: 600;">
+                    <span class="spinner" style="display:inline-block; animation: spin 2s linear infinite;">🧬</span> 분석 데이터를 처리하고 있습니다...
+                </div>
+
+                <div id="ai-result-display" style="display: none; margin-top: 35px; padding: 25px; background: #f1f5f9; border-radius: 18px; font-size: 0.95rem; line-height: 1.8;">
+                    <h4 style="margin-top: 0; color: #1e293b; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">🔍 AI 분석 리포트</h4>
+                    <div id="ai-text-output" style="white-space: pre-wrap; color: #334155;"></div>
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 15px;">* 해당 정보는 AI 추정치이며, 실제 통관 업무는 솔 관세사무소의 확답을 받으셔야 합니다.</p>
+                    <a href="#contact" class="cta-button secondary" style="width: 100%; text-align: center; text-decoration: none; display: block; box-sizing: border-box; margin-top: 15px;">관세사 1:1 상담하기</a>
                 </div>
             </div>
         </div>
@@ -120,7 +152,7 @@
                     <h2 data-i18n="location_title">찾아오시는 길</h2>
                     <p class="address" data-i18n="location_address">경기 성남시 분당구 판교역로 136 B2010</p>
                     <p class="desc" data-i18n="location_desc">판교역과 직접 연결된 힐스테이트 업무상가로 오시면 됩니다.</p>
-                    <a href="https://map.naver.com/p/entry/place/1855318462?placePath=/home?entry=plt&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202602191727&locale=ko&svcName=map_pcv5&searchType=place&lng=127.1104534&lat=37.3924916&c=15.00,0,0,0,dh" target="_blank" class="cta-button" data-i18n="location_map_btn">네이버 지도로 보기</a>
+                    <a href="https://map.naver.com/p/entry/place/1855318462" target="_blank" class="cta-button" data-i18n="location_map_btn">네이버 지도로 보기</a>
                 </div>
                 <div class="location-map">
                     <img src="회사 위치 사진.png" alt="솔 관세사무소 위치 지도">
@@ -145,19 +177,17 @@
                 <form action="https://formspree.io/f/xkovzajb" method="POST" class="fade-in">
                     <div class="form-group">
                         <label for="name" data-i18n="form_name_label">이름/기업명</label>
-                        <input type="text" id="name" name="name" placeholder="성함 또는 업체명을 입력하세요" required data-i18n-placeholder="form_name_placeholder">
+                        <input type="text" id="name" name="name" placeholder="성함 또는 업체명을 입력하세요" required>
                     </div>
                     <div class="form-group">
-                        <label for="email" data-i18n="form_contact_label">연락처/이메일</label>
-                        <input type="text" id="contact_info" name="contact" placeholder="답변 받으실 연락처를 입력하세요" required data-i18n-placeholder="form_contact_placeholder">
+                        <label for="contact_info" data-i18n="form_contact_label">연락처/이메일</label>
+                        <input type="text" id="contact_info" name="contact" placeholder="답변 받으실 연락처를 입력하세요" required>
                     </div>
                     <div class="form-group">
                         <label for="message" data-i18n="form_message_label">문의내용</label>
-                        <textarea id="message" name="message" rows="5" placeholder="문의하실 내용을 상세히 적어주세요" required data-i18n-placeholder="form_message_placeholder"></textarea>
+                        <textarea id="message" name="message" rows="5" placeholder="문의하실 내용을 상세히 적어주세요" required></textarea>
                     </div>
-                    <!-- Formspree setting to redirect after success -->
                     <input type="hidden" name="_next" value="https://wnnnnnnn89.github.io/sol-customs/">
-                    <input type="hidden" name="_subject" value="솔 관세사무소 웹사이트 문의">
                     <button type="submit" data-i18n="form_submit">상담 신청 보내기</button>
                 </form>
             </div>
@@ -166,16 +196,6 @@
 
     <footer>
         <div class="container">
-            <div class="footer-top">
-                <h3 data-i18n="footer_title">솔 관세사무소</h3>
-                <nav>
-                    <ul>
-                        <li><a href="#about" data-i18n="nav_about">소개</a></li>
-                        <li><a href="#services" data-i18n="nav_services">서비스</a></li>
-                        <li><a href="#contact" data-i18n="nav_contact">문의</a></li>
-                    </ul>
-                </nav>
-            </div>
             <div class="footer-bottom">
                 <div class="info">
                     <p data-i18n="footer_rep">대표자: 이지홍 | 사업자등록번호: 558-14-02071</p>
@@ -187,6 +207,67 @@
         </div>
     </footer>
 
+    <style>
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+
+    <script type="module">
+        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+        // 이지홍 관세사님의 API Key
+        const API_KEY = "AIzaSyCR-PTXxNnblAyj1R9A1jpEgHl6o-iZQag";
+        const genAI = new GoogleGenerativeAI(API_KEY);
+
+        window.handleAiFile = function(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('ai-preview-img');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    document.getElementById('ai-upload-placeholder').style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        window.askGemini = async function() {
+            const fileInput = document.getElementById('ai-fileInput');
+            if (!fileInput.files[0]) return alert("분석할 사진을 먼저 선택해 주세요.");
+
+            document.getElementById('ai-loading-status').style.display = 'block';
+            document.getElementById('ai-result-display').style.display = 'none';
+            document.getElementById('ai-analyze-btn').disabled = true;
+
+            try {
+                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+                const file = fileInput.files[0];
+                const imageData = await new Promise(resolve => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                    reader.readAsDataURL(file);
+                });
+
+                const prompt = "너는 솔 관세사무소의 전문 관세사야. 사진 속 물품을 분석해서 다음 정보를 한국어로 명확하게 알려줘. 1.예상 품명 2.추정 HS Code 6단위 3.기본 관세율 및 부가세 4.수입 시 필수 요건(전기인증, 전파인증, 식품검사 등 대상 여부). 아주 친절하고 전문적인 말투로 답변해줘.";
+                
+                const result = await model.generateContent([
+                    prompt,
+                    { inlineData: { data: imageData, mimeType: file.type } }
+                ]);
+                
+                const response = await result.response;
+                document.getElementById('ai-text-output').innerText = response.text();
+                document.getElementById('ai-result-display').style.display = 'block';
+            } catch (error) {
+                console.error(error);
+                alert("AI 분석 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+            } finally {
+                document.getElementById('ai-loading-status').style.display = 'none';
+                document.getElementById('ai-analyze-btn').disabled = false;
+            }
+        }
+    </script>
     <script src="main.js"></script>
 </body>
 </html>
