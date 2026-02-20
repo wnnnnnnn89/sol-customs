@@ -260,8 +260,14 @@
                 document.getElementById('ai-text-output').innerText = response.text();
                 document.getElementById('ai-result-display').style.display = 'block';
             } catch (error) {
-                console.error(error);
-                alert("AI 분석 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+                console.error("Gemini AI 상세 에러:", error);
+                let errorMsg = "AI 분석 중 오류가 발생했습니다.";
+                if (error.message.includes("404")) {
+                    errorMsg = "모델을 찾을 수 없습니다(404). API 키가 활성화되었는지 또는 모델명이 정확한지 확인이 필요합니다.";
+                } else if (error.message.includes("403")) {
+                    errorMsg = "접근 권한이 없습니다(403). API 키 권한 설정을 확인해 주세요.";
+                }
+                alert(errorMsg + "\n상세내용: " + error.message);
             } finally {
                 document.getElementById('ai-loading-status').style.display = 'none';
                 document.getElementById('ai-analyze-btn').disabled = false;
