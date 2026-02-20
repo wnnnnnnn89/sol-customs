@@ -241,8 +241,8 @@
             document.getElementById('ai-analyze-btn').disabled = true;
 
             try {
-                // v1 API 버전을 명시하여 안정성 확보
-                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }, { apiVersion: "v1" });
+                // 모델 이름을 최신 버전으로 명시하고 API 버전 설정을 SDK 기본값에 맡김
+                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
                 const file = fileInput.files[0];
                 const imageData = await new Promise(resolve => {
                     const reader = new FileReader();
