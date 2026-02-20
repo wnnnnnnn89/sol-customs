@@ -29,7 +29,6 @@
                 <ul>
                     <li><a href="#about" data-i18n="nav_about">소개</a></li>
                     <li><a href="#services" data-i18n="nav_services">서비스</a></li>
-                    <li><a href="#ai-check" data-i18n="nav_ai">AI 조회</a></li>
                     <li><a href="#location" data-i18n="nav_location">오시는 길</a></li>
                     <li><a href="#contact" data-i18n="nav_contact">문의</a></li>
                     <li><a href="https://blog.naver.com/sol_customs" target="_blank" class="blog-link" data-i18n="nav_blog">블로그</a></li>
@@ -109,41 +108,6 @@
         </div>
     </section>
 
-    <section id="ai-check" style="background-color: #f8fafc; padding: 100px 0;">
-        <div class="container">
-            <div class="section-header fade-in" style="text-align: center; margin-bottom: 50px;">
-                <span class="section-tag">AI Smart Solution</span>
-                <h2>AI 실시간 수입 규제 조회</h2>
-                <p style="color: #64748b; margin-top: 15px;">조회할 물품 사진을 업로드하면 Gemini AI가 관세율과 인증 요건을 즉시 분석합니다.</p>
-            </div>
-
-            <div class="contact-wrapper fade-in" style="max-width: 650px; margin: 0 auto; background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
-                <div id="ai-drop-area" onclick="document.getElementById('ai-fileInput').click()" 
-                     style="border: 2px dashed #e2e8f0; border-radius: 20px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; background: #fcfcfc; position: relative; overflow: hidden;">
-                    <div id="ai-upload-placeholder" style="text-align: center;">
-                        <span style="font-size: 55px;">📸</span>
-                        <p style="margin-top: 20px; color: #94a3b8; font-weight: 500;">사진을 업로드하여 분석 시작</p>
-                    </div>
-                    <img id="ai-preview-img" style="width: 100%; height: 100%; object-fit: cover; display: none;">
-                </div>
-                <input type="file" id="ai-fileInput" accept="image/*" style="display:none" onchange="handleAiFile(this)">
-
-                <button class="cta-button" id="ai-analyze-btn" onclick="askGemini()" style="width: 100%; margin-top: 25px; border: none; font-family: inherit; font-size: 1.1rem; cursor: pointer;">AI 분석 실행</button>
-                
-                <div id="ai-loading-status" style="display: none; text-align: center; margin-top: 25px; color: #2563eb; font-weight: 600;">
-                    <span class="spinner" style="display:inline-block; animation: spin 2s linear infinite;">🧬</span> 분석 데이터를 처리하고 있습니다...
-                </div>
-
-                <div id="ai-result-display" style="display: none; margin-top: 35px; padding: 25px; background: #f1f5f9; border-radius: 18px; font-size: 0.95rem; line-height: 1.8;">
-                    <h4 style="margin-top: 0; color: #1e293b; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">🔍 AI 분석 리포트</h4>
-                    <div id="ai-text-output" style="white-space: pre-wrap; color: #334155;"></div>
-                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 15px;">* 해당 정보는 AI 추정치이며, 실제 통관 업무는 솔 관세사무소의 확답을 받으셔야 합니다.</p>
-                    <a href="#contact" class="cta-button secondary" style="width: 100%; text-align: center; text-decoration: none; display: block; box-sizing: border-box; margin-top: 15px;">관세사 1:1 상담하기</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="location">
         <div class="container fade-in">
             <div class="location-wrapper">
@@ -207,74 +171,6 @@
         </div>
     </footer>
 
-    <style>
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
-
-    <script type="module">
-        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
-        // 이지홍 관세사님의 API Key
-        const API_KEY = "AIzaSyAIWpxijEzsZHd8QtIqmmTzPcxP1XWxYvc";
-        const genAI = new GoogleGenerativeAI(API_KEY);
-
-        window.handleAiFile = function(input) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.getElementById('ai-preview-img');
-                    img.src = e.target.result;
-                    img.style.display = 'block';
-                    document.getElementById('ai-upload-placeholder').style.display = 'none';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        window.askGemini = async function() {
-            const fileInput = document.getElementById('ai-fileInput');
-            if (!fileInput.files[0]) return alert("분석할 사진을 먼저 선택해 주세요.");
-
-            document.getElementById('ai-loading-status').style.display = 'block';
-            document.getElementById('ai-result-display').style.display = 'none';
-            document.getElementById('ai-analyze-btn').disabled = true;
-
-            try {
-                // 모델 이름을 최신 버전으로 명시하고 API 버전 설정을 SDK 기본값에 맡김
-                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-                const file = fileInput.files[0];
-                const imageData = await new Promise(resolve => {
-                    const reader = new FileReader();
-                    reader.onloadend = () => resolve(reader.result.split(',')[1]);
-                    reader.readAsDataURL(file);
-                });
-
-                const prompt = "너는 솔 관세사무소의 전문 관세사야. 사진 속 물품을 분석해서 다음 정보를 한국어로 명확하게 알려줘. 1.예상 품명 2.추정 HS Code 6단위 3.기본 관세율 및 부가세 4.수입 시 필수 요건(전기인증, 전파인증, 식품검사 등 대상 여부). 아주 친절하고 전문적인 말투로 답변해줘.";
-                
-                const result = await model.generateContent([
-                    prompt,
-                    { inlineData: { data: imageData, mimeType: file.type } }
-                ]);
-                
-                const response = await result.response;
-                document.getElementById('ai-text-output').innerText = response.text();
-                document.getElementById('ai-result-display').style.display = 'block';
-            } catch (error) {
-                console.error("Gemini AI 상세 에러:", error);
-                let errorMsg = "AI 분석 중 오류가 발생했습니다.";
-                if (error.message.includes("404")) {
-                    errorMsg = "모델을 찾을 수 없습니다(404). API 키가 활성화되었는지 또는 모델명이 정확한지 확인이 필요합니다.";
-                } else if (error.message.includes("403")) {
-                    errorMsg = "접근 권한이 없습니다(403). API 키 권한 설정을 확인해 주세요.";
-                }
-                alert(errorMsg + "\n상세내용: " + error.message);
-            } finally {
-                document.getElementById('ai-loading-status').style.display = 'none';
-                document.getElementById('ai-analyze-btn').disabled = false;
-            }
-        }
-    </script>
     <script src="main.js"></script>
 </body>
 </html>
