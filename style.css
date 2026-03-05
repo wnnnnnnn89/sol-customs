@@ -450,6 +450,13 @@ footer {
     align-items: flex-end;
 }
 
+.footer-bottom .info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: var(--white);
+    letter-spacing: 1px;
+}
+
 .footer-bottom .info p {
     font-size: 0.9rem;
     color: var(--text-sub);

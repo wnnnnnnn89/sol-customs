@@ -92,7 +92,7 @@ const translations = {
         form_message_label: "Message",
         form_message_placeholder: "Please describe your inquiry in detail",
         form_submit: "Send Request",
-        footer_title: "Sol Customs",
+        footer_title: "SOL CUSTOMS",
         footer_rep: "CEO: Jihong Lee | Business Registration: 558-14-02071",
         footer_addr: "Address: B2010, 136 Pangyoyeok-ro, Bundang-gu, Seongnam-si, Gyeonggi-do",
         footer_tel_fax: "Tel: +82 507-1391-1290 | Fax: +82 508-911-1290",
