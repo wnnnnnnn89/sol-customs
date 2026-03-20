@@ -202,13 +202,44 @@ header nav a:hover {
 }
 
 .about-wrapper {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
 }
 
-.about-text.full-width {
-    max-width: 800px;
-    text-align: center;
+.about-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+
+.about-image img {
+    width: 100%;
+    display: block;
+    filter: contrast(1.05);
+}
+
+.ceo-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: var(--white);
+}
+
+.ceo-info h4 {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.ceo-info span {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 .about-text h2 {
@@ -225,7 +256,6 @@ header nav a:hover {
 .features {
     margin-top: 40px;
     display: flex;
-    justify-content: center;
     gap: 30px;
 }
 
