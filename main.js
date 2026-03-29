@@ -49,7 +49,8 @@ const translations = {
         footer_rep: "대표자: 이지홍 | 사업자등록번호: 558-14-02071",
         footer_addr: "주소: 경기 성남시 분당구 판교역로 136 B2010",
         footer_tel_fax: "Tel: 0507-1391-1290 | Fax: 0508-911-1290",
-        footer_copy: "&copy; 2021 솔 관세사무소. All Rights Reserved."
+        footer_copy: "&copy; 2021 솔 관세사무소. All Rights Reserved.",
+        contact_qr_desc: "카카오톡으로 문의하기"
     },
     en: {
         nav_about: "About",
@@ -100,7 +101,8 @@ const translations = {
         footer_rep: "CEO: Jihong Lee | Business Registration: 558-14-02071",
         footer_addr: "Address: B2010, 136 Pangyoyeok-ro, Bundang-gu, Seongnam-si, Gyeonggi-do",
         footer_tel_fax: "Tel: +82 507-1391-1290 | Fax: +82 508-911-1290",
-        footer_copy: "&copy; 2021 Sol Customs. All Rights Reserved."
+        footer_copy: "&copy; 2021 Sol Customs. All Rights Reserved.",
+        contact_qr_desc: "Contact via KakaoTalk"
     }
 };
 
